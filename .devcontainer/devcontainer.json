@@ -1,0 +1,26 @@
+{
+    "name": "MLOps CI/CD Demo - DVC/MLEM/AWS",
+    // Reemplazamos el bloque "build" por el comando "image"
+    "image": "cicd-mlops-demo-debug:latest",
+
+    // Reenvía el puerto 8000 para probar la aplicación FastAPI localmente
+    "forwardPorts": [8000],
+
+    // Extenciones de VS Code/Cursor recomendadas
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "eamodio.gitlens",
+                "redhat.vscode-yaml"
+            ]
+        }
+    },
+
+    // Este comando se ejecutará después de que el contenedor se inicie
+    "postCreateCommand": "dvc pull -r read || echo 'Advertencia: Si falló, verifique su configuración de DVC y acceso a S3.'",
+
+    // Mantiene el terminal en /bin/bash por defecto
+    "remoteUser": "root"
+}
